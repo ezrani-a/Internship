@@ -1,0 +1,40 @@
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
+const db = require('./config/db');
+
+// Add near the top of server.js
+const initializeDatabase = require('./config/initDatabase');
+
+const app = express();
+const port = process.env.PORT || 5000;
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Test database connection
+async function testConnection() {
+  try {
+    const [rows] = await db.query('SELECT 1 + 1 AS solution');
+    console.log('✅ Database connection successful:', rows[0].solution === 2);
+  } catch (error) {
+    console.error('❌ Database connection failed:', error.message);
+  }
+}
+testConnection();
+
+// Add this after database connection test
+initializeDatabase();
+
+// Routes will be added here later
+
+// A simple test route
+app.get('/', (req, res) => {
+  res.json({ message: 'Debo Job Portal API is running!' });
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
+});
