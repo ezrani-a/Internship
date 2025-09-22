@@ -60,5 +60,5 @@ Used for sending registration confirmations, password resets, etc.
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/debo-job-portal.git
+   git clone https://github.com/ezrani-a/debo-job-portal.git
    cd debo-job-portal/backend
